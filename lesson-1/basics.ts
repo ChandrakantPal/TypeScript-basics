@@ -1,6 +1,6 @@
-let userName = 'Jack'
-let hasLoggedIn = true
+let userName: string = 'Jack'
+let hasLoggedIn: boolean = true
 
-hasLoggedIn += ' Herrington'
+userName += ' Herrington'
 
-console.log(hasLoggedIn)
+console.log(userName)
