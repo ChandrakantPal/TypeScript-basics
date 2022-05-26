@@ -19,10 +19,13 @@ const names: string[] = userName.split(' ')
 const numArr: Array<number> = [1, 2, 3]
 
 // Objects
-const obj: {
+
+interface Person {
   first: string
   last: string
-} = {
+}
+
+const obj: Person = {
   first: 'Sanjay',
   last: 'Pal',
 }
