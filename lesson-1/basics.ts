@@ -1,10 +1,10 @@
 // string
-let userName: string = 'Jack'
+let userName: string = 'Sanjay'
 
 // boolean
 let hasLoggedIn: boolean = true
 
-userName += ' Herrington'
+userName += ' Pal'
 
 console.log(userName)
 
@@ -17,3 +17,12 @@ let Regex: RegExp = /foo/
 // Arrays
 const names: string[] = userName.split(' ')
 const numArr: Array<number> = [1, 2, 3]
+
+// Objects
+const obj: {
+  first: string
+  last: string
+} = {
+  first: 'Sanjay',
+  last: 'Pal',
+}
