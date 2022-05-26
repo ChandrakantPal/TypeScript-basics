@@ -29,3 +29,9 @@ const obj: Person = {
   first: 'Sanjay',
   last: 'Pal',
 }
+
+// objects as map
+const ids: Record<number, string> = {
+  10: 'a',
+  30: 'b',
+}
