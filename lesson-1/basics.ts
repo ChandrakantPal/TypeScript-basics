@@ -33,5 +33,7 @@ const obj: Person = {
 // objects as map
 const ids: Record<number, string> = {
   10: 'a',
-  30: 'b',
+  20: 'b',
 }
+
+ids[30] = 'c'
