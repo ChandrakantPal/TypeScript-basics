@@ -10,6 +10,9 @@ export const addStrings = (str1: string, str2: string = ''): string =>
 export const format = (title: string, param: string | number): string =>
   `${title} ${param}`
 
-export const printFormat = (title: string, param: string | number) => {
+export const printFormat = (title: string, param: string | number): void => {
   console.log(format(title, param))
 }
+
+export const fetchData = (url: string): Promise<string> =>
+  Promise.resolve(`Data from ${url}`)
