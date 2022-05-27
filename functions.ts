@@ -29,5 +29,6 @@ export function introduce(salutation: string, ...names: string[]): string {
 // testing type enforcement at compile time
 export function getName(user: { first: string; last: string }): string {
   // ?. to avoid error during runtime
-  return `${user?.first} ${user?.last}`
+  //   ?? to avoid displaying undefined undefined
+  return `${user?.first ?? 'first'} ${user?.last ?? 'last'}`
 }
