@@ -16,3 +16,7 @@ export const printFormat = (title: string, param: string | number): void => {
 
 export const fetchData = (url: string): Promise<string> =>
   Promise.resolve(`Data from ${url}`)
+
+function introduce(salutation: string, ...names: string[]): string {
+  return `${salutation} ${names.join(' ')}`
+}
