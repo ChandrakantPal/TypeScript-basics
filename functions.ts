@@ -9,3 +9,7 @@ export const addStrings = (str1: string, str2: string = ''): string =>
 
 export const format = (title: string, param: string | number): string =>
   `${title} ${param}`
+
+export const printFormat = (title: string, param: string | number) => {
+  console.log(format(title, param))
+}
