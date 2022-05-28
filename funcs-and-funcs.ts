@@ -15,3 +15,15 @@ export function arrayMutate(
 }
 
 console.log(arrayMutate([1, 2, 3], (v) => v * 10))
+
+// function that returns a function type
+
+export function createAdder(num: number): (val: number) => number {
+  return (val: number) => num + val
+}
+
+// 1 here is num parameter
+const addOne = createAdder(1)
+
+// 55 is val parameter
+console.log(addOne(55))
