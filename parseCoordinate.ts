@@ -43,3 +43,6 @@ function parseCoordinate(arg1: unknown, arg2?: unknown): Coordinate {
 
   return coord
 }
+
+console.log(parseCoordinate(10, 20))
+console.log(parseCoordinate({ x: 52, y: 35 }))
