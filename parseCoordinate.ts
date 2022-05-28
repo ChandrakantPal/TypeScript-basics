@@ -17,6 +17,7 @@ function parseCoordinateFromNumber(x: number, y: number): Coordinate {
 }
 
 // function overloading
+function parseCoordinate(str: string): Coordinate
 function parseCoordinate(obj: Coordinate): Coordinate
 function parseCoordinate(x: number, y: number): Coordinate
 // unknow is basicaly any but have to be cast before using
@@ -26,9 +27,13 @@ function parseCoordinate(arg1: unknown, arg2?: unknown): Coordinate {
     x: 0,
     y: 0,
   }
-
-  //   arg1 is checked for 'object' insted of Coordinate because this will be checked during run and not compile time.
-  if (typeof arg1 === 'object') {
+  if (typeof arg1 === 'string') {
+    ;(arg1 as string).split(',').forEach((str) => {
+      const [key, value] = str.split(':')
+      coord[key as 'x' | 'y'] = parseInt(value, 10)
+    })
+  } else if (typeof arg1 === 'object') {
+    //   arg1 is checked for 'object' insted of Coordinate because this will be checked during run and not compile time.
     coord = {
       // arg1 casted as Coordinate because we used unknow type for it.
       ...(arg1 as Coordinate),
@@ -46,3 +51,4 @@ function parseCoordinate(arg1: unknown, arg2?: unknown): Coordinate {
 
 console.log(parseCoordinate(10, 20))
 console.log(parseCoordinate({ x: 52, y: 35 }))
+console.log(parseCoordinate('x:12,y:22'))
