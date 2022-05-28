@@ -20,9 +20,12 @@ function findHouses(
   houses: House[],
   filter: (house: House) => boolean
 ): HouseWithID[]
-function findHouses(arg1: unknown, arg2?: unknown): HouseWithID[] {
+function findHouses(
+  houses: string | House[],
+  filter?: (house: House) => boolean
+): HouseWithID[] {
   let houseWithID: HouseWithID = {
-    id: '',
+    id: 0,
     name: '',
     planets: '',
   }
