@@ -5,9 +5,9 @@ interface House {
 }
 
 interface HouseWithID {
+  id: number
   name: string
   planets: string | string[]
-  id: string
 }
 
 function findHouses(houses: string): HouseWithID[]
