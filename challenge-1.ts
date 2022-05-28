@@ -1,4 +1,4 @@
-import houses from './houses.json'
+import houses from './houses'
 interface House {
   name: string
   planets: string | string[]
