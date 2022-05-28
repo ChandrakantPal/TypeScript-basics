@@ -11,3 +11,5 @@ export function arrayMutate(
 ): number[] {
   return numbers.map(mutate)
 }
+
+console.log(arrayMutate([1, 2, 3], (v) => v * 10))
