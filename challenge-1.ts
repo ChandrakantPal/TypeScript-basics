@@ -21,15 +21,14 @@ function findHouses(
   filter: (house: House) => boolean
 ): HouseWithID[]
 function findHouses(
-  houses: string | House[],
+  input: string | House[],
   filter?: (house: House) => boolean
 ): HouseWithID[] {
-  let houseWithID: HouseWithID = {
-    id: 0,
-    name: '',
-    planets: '',
-  }
-  return [houseWithID]
+  const houses: House[] = typeof input === 'string' ? JSON.parse(input) : input
+  return (filter ? houses.filter(filter) : houses).map((house) => ({
+    id: houses.indexOf(house),
+    ...house,
+  }))
 }
 
 console.log(
