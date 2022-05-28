@@ -18,7 +18,9 @@ console.log(arrayMutate([1, 2, 3], (v) => v * 10))
 
 // function that returns a function type
 
-export function createAdder(num: number): (val: number) => number {
+export type adderFunction = (v: number) => number
+
+export function createAdder(num: number): adderFunction {
   return (val: number) => num + val
 }
 
