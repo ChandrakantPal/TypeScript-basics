@@ -5,9 +5,11 @@ export function printToFile(text: string, callback: () => void): void {
 }
 
 // callback function with parameters and return type
+export type MutationFunction = (v: number) => number
+
 export function arrayMutate(
   numbers: number[],
-  mutate: (v: number) => number
+  mutate: MutationFunction
 ): number[] {
   return numbers.map(mutate)
 }
