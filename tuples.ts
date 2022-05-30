@@ -20,3 +20,8 @@ function simpleStringState(
     },
   ]
 }
+
+const [str1getter, str1setter] = simpleStringState('hello')
+console.log(str1getter())
+str1setter('goodbye')
+console.log(str1getter())
