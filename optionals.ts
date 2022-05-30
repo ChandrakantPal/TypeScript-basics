@@ -17,3 +17,9 @@ interface User {
 function getEmail(user: User): string {
   return user?.info?.email ?? ''
 }
+
+// Optional Callbacks
+function addWithCallback(x: number, y: number, callback?: () => void) {
+  console.log([x, y])
+  callback?.()
+}
