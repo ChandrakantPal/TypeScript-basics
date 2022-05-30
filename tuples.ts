@@ -22,6 +22,10 @@ function simpleStringState(
 }
 
 const [str1getter, str1setter] = simpleStringState('hello')
+const [str2getter, str2setter] = simpleStringState('hi')
 console.log(str1getter())
+console.log(str2getter())
 str1setter('goodbye')
+str2setter('hey')
 console.log(str1getter())
+console.log(str2getter())
