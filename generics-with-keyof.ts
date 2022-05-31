@@ -12,3 +12,20 @@ const dogs = [
 
 console.log(pluck(dogs, 'age'))
 console.log(pluck(dogs, 'name'))
+
+interface BaseEvent {
+  time: number
+  user: string
+}
+// Type & {key:value} is basically adding two types
+interface EventMap {
+  addToCart: BaseEvent & { quantity: number; productID: string }
+  checkout: BaseEvent
+}
+
+function sendEvent<Name extends keyof EventMap>(
+  name: Name,
+  data: EventMap[Name]
+): void {
+  console.log(name, data)
+}
