@@ -7,3 +7,8 @@ function simpleState<T>(initial: T): [() => T, (v: T) => void] {
     },
   ]
 }
+
+const [st1getter, st1setter] = simpleState(1)
+console.log(st1getter())
+st1setter(2)
+console.log(st1getter())
