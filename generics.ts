@@ -21,11 +21,17 @@ console.log(st2getter())
 st2setter(null)
 console.log(st2getter())
 
+// Generic for interface
+interface Rank<RankItem> {
+  item: RankItem
+  rank: number
+}
+
 function ranker<RankItem>(
   items: RankItem[],
   rank: (v: RankItem) => number
 ): RankItem[] {
-  const ranks = items.map((item) => ({
+  const ranks: Rank<RankItem>[] = items.map((item) => ({
     item,
     rank: rank(item),
   }))
