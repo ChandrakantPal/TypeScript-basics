@@ -29,3 +29,6 @@ function sendEvent<Name extends keyof EventMap>(
 ): void {
   console.log(name, data)
 }
+
+sendEvent('addToCart', { productID: '123', quantity: 2, user: 'DK', time: 20 })
+sendEvent('checkout', { time: 20, user: 'DK' })
