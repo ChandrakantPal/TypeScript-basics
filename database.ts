@@ -31,4 +31,7 @@ const myDB = new PersistentMemoryDB()
 myDB.set('foo', 'bar')
 // myDB.db['foo'] = 'baz' cannot do that since db is private / protected
 console.log(myDB.get('foo'))
-console.log(myDB.saveToString())
+const saved = myDB.saveToString()
+
+const myDB2 = new PersistentMemoryDB()
+myDB2.restoreFromString(saved)
