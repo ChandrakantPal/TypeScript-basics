@@ -3,8 +3,13 @@ interface Database {
   set(id: string, value: string): void
 }
 
+interface Persistable {
+  saveToString(): string
+  restoreFromString(storedState: string): void
+}
+
 class InMemoryDatabase implements Database {
-  private db: Record<string, string> = {}
+  protected db: Record<string, string> = {}
   get(id: string): string {
     return this.db[id]
   }
@@ -13,7 +18,16 @@ class InMemoryDatabase implements Database {
   }
 }
 
+class PersistentMemoryDB extends InMemoryDatabase implements Persistable {
+  saveToString(): string {
+    return JSON.stringify(this.db)
+  }
+  restoreFromString(storedState: string): void {
+    this.db = JSON.parse(storedState)
+  }
+}
+
 const myDB = new InMemoryDatabase()
 myDB.set('foo', 'bar')
-// myDB.db['foo'] = 'baz' cannot do that since db is private
+// myDB.db['foo'] = 'baz' cannot do that since db is private / protected
 console.log(myDB.get('foo'))
