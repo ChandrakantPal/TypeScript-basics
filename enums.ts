@@ -28,3 +28,12 @@ function rollDice(dice: 1 | 2 | 3): number {
 }
 
 console.log(rollDice(3))
+
+// string Literals
+function sendEvent(name: 'addToCart', data: { productId: number }): void
+function sendEvent(name: 'checkout', data: { cartCount: number }): void
+function sendEvent(name: string, data: unknown): void {
+  console.log(`${name}: ${JSON.stringify(data)}`)
+}
+
+sendEvent('addToCart', { productId: 12321 })
