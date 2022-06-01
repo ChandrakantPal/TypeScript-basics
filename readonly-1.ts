@@ -1,9 +1,12 @@
 interface Cat {
+  // readonly name: string
   name: string
   breed: string
 }
 
-function makeCat(name: string, breed: string): Cat {
+type ReadonlyCat = Readonly<Cat>
+
+function makeCat(name: string, breed: string): ReadonlyCat {
   return {
     name,
     breed,
@@ -11,3 +14,4 @@ function makeCat(name: string, breed: string): Cat {
 }
 
 const usul = makeCat('Usul', 'Tabby')
+// usul.name = "CAT" throws error cause fields are readonly
