@@ -4,7 +4,7 @@ interface Database {
 }
 
 class InMemoryDatabase implements Database {
-  db: Record<string, string> = {}
+  private db: Record<string, string> = {}
   get(id: string): string {
     return this.db[id]
   }
@@ -15,4 +15,5 @@ class InMemoryDatabase implements Database {
 
 const myDB = new InMemoryDatabase()
 myDB.set('foo', 'bar')
+// myDB.db['foo'] = 'baz' cannot do that since db is private
 console.log(myDB.get('foo'))
