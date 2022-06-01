@@ -4,9 +4,7 @@ interface Cat {
   breed: string
 }
 
-type ReadonlyCat = Readonly<Cat>
-
-function makeCat(name: string, breed: string): ReadonlyCat {
+function makeCat(name: string, breed: string): Readonly<Cat> {
   return {
     name,
     breed,
