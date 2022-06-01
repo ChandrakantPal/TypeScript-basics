@@ -36,3 +36,12 @@ console.log(
 type RequiredMyUser = Required<MyUser>
 
 type JustEmailAndName = Pick<MyUser, 'email' | 'name'>
+
+const mapById = (users: MyUser[]): Record<string, MyUser> => {
+  return users.reduce((a, v) => {
+    return {
+      ...a,
+      [v.id]: v,
+    }
+  }, {})
+}
