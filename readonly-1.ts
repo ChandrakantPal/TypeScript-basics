@@ -24,3 +24,7 @@ function makeCoordinate(
 
 const c1 = makeCoordinate(10, 20, 30)
 // c1[0] = 50 readonly error will be thrown
+
+// contents of array as readonly
+const reallyConst = [1, 2, 3] as const
+// reallyConst[0] = 50 Cannot assign to '0' because it is a read-only property.
