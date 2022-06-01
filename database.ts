@@ -35,6 +35,6 @@ const saved = myDB.saveToString()
 myDB.set('foo', 2)
 console.log(myDB.get('foo'))
 
-const myDB2 = new PersistentMemoryDB()
+const myDB2 = new PersistentMemoryDB<number>()
 myDB2.restoreFromString(saved)
 console.log(myDB2.get('foo'))
