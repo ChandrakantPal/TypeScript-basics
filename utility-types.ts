@@ -34,3 +34,5 @@ console.log(
 )
 
 type RequiredMyUser = Required<MyUser>
+
+type JustEmailAndName = Pick<MyUser, 'email' | 'name'>
