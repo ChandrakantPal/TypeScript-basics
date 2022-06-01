@@ -1,6 +1,6 @@
 interface MyUser {
   name: string
-  id: string
+  id: number
   email?: string
   phone?: string
 }
@@ -24,7 +24,7 @@ console.log(
   merge(
     {
       name: 'Bob',
-      id: '1233',
+      id: 1233,
       email: 'dontemail@dontemail.com',
     },
     {
@@ -39,7 +39,7 @@ type JustEmailAndName = Pick<MyUser, 'email' | 'name'>
 
 type UserWithoutID = Omit<MyUser, 'id'>
 
-const mapById = (users: MyUser[]): Record<string, UserWithoutID> => {
+const mapById = (users: MyUser[]): Record<MyUser['id'], UserWithoutID> => {
   return users.reduce((a, v) => {
     const { id, ...other } = v
     return {
@@ -52,11 +52,11 @@ const mapById = (users: MyUser[]): Record<string, UserWithoutID> => {
 console.log(
   mapById([
     {
-      id: 'foo',
+      id: 1,
       name: 'Mr. Foo',
     },
     {
-      id: 'baz',
+      id: 2,
       name: 'Mrs. Baz',
     },
   ])
