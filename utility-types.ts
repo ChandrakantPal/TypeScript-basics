@@ -4,7 +4,7 @@ interface MyUser {
   email?: string
   phone?: string
 }
-
+// Partial makes all the fields optional
 type MyUserOptionals = Partial<MyUser>
 
 // interface MyUserOptionals {
@@ -32,3 +32,5 @@ console.log(
     }
   )
 )
+
+type RequiredMyUser = Required<MyUser>
