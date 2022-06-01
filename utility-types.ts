@@ -45,3 +45,16 @@ const mapById = (users: MyUser[]): Record<string, MyUser> => {
     }
   }, {})
 }
+
+console.log(
+  mapById([
+    {
+      id: 'foo',
+      name: 'Mr. Foo',
+    },
+    {
+      id: 'baz',
+      name: 'Mrs. Baz',
+    },
+  ])
+)
