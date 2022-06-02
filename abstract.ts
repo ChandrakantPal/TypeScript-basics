@@ -3,10 +3,11 @@ abstract class StreetFighter {
 
   move() {}
   fight() {
-    console.log(`attack with ${this.getSpecialAttack()}`)
+    console.log(`${this.name} attack with ${this.getSpecialAttack()}`)
   }
 
   abstract getSpecialAttack(): string
+  abstract get name(): string
 }
 
 // const ryu = new StreetFighter() Cannot create an instance of an abstract class.
@@ -14,6 +15,10 @@ abstract class StreetFighter {
 class Ryu extends StreetFighter {
   getSpecialAttack(): string {
     return 'Hadoken'
+  }
+
+  get name(): string {
+    return 'Ryu'
   }
 }
 
