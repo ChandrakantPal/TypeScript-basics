@@ -6,4 +6,5 @@ type MyFlexibleDogInfo = {
 const dog: MyFlexibleDogInfo = {
   name: 'LG',
   breed: 'Mutt',
+  age: 22,
 }
