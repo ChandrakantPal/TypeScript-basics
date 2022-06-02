@@ -53,6 +53,8 @@ sdb1.set('a', 'hello')
 
 type Constructor<T> = new (...args: any[]) => T
 
+// Constructor<{ getObject(): object  }> to make sure extended class has getObject method
+
 function Dumpable<
   T extends Constructor<{
     getObject(): object
