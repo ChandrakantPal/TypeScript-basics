@@ -22,6 +22,16 @@ class Ryu extends StreetFighter {
   }
 }
 
+class ChunLi extends StreetFighter {
+  getSpecialAttack(): string {
+    return 'Lightning Kick'
+  }
+
+  get name(): string {
+    return 'Chun-Li'
+  }
+}
+
 const ryu = new Ryu()
 
 ryu.fight()
