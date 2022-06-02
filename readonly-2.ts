@@ -18,8 +18,13 @@ class DogList {
   static addDog(dog: Doggy) {
     DogList.instance.doggies.push(dog)
   }
+
+  getDogs() {
+    return this.doggies
+  }
 }
 
-DogList.instance
+DogList.addDog(lgg)
+console.log(DogList.instance.getDogs())
 
 // const dl = new DogList()  Constructor of class 'DogList' is private and only accessible within the class declaration.
