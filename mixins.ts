@@ -43,3 +43,8 @@ function CreateSimpleMemoryDatabase<T>() {
     }
   }
 }
+
+const StringDatabase = CreateSimpleMemoryDatabase<string>()
+
+const sdb1 = new StringDatabase()
+sdb1.set('a', 'hello')
