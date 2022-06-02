@@ -3,3 +3,6 @@ function myLogFunction() {
     console.log(str)
   }
 }
+
+const logger = myLogFunction()
+logger('your string')
