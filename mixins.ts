@@ -1,3 +1,4 @@
+// function that creates function
 function myLogFunction() {
   return (str: string) => {
     console.log(str)
@@ -7,6 +8,7 @@ function myLogFunction() {
 const logger = myLogFunction()
 logger('your string')
 
+// function that creates class
 function createLoggerClass() {
   return class MyLoggerClass {
     private completeLog: string = ''
@@ -19,3 +21,9 @@ function createLoggerClass() {
     }
   }
 }
+
+// intanciate
+const MyLogger = createLoggerClass()
+const logger2 = new MyLogger()
+logger2.log('Foo')
+console.log(logger2.dumpLog())
