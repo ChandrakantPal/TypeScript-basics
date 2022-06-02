@@ -27,3 +27,19 @@ const MyLogger = createLoggerClass()
 const logger2 = new MyLogger()
 logger2.log('Foo')
 console.log(logger2.dumpLog())
+
+function CreateSimpleMemoryDatabase<T>() {
+  return class SimpleMemoryDatabase {
+    private db: Record<string, T> = {}
+
+    set(id: string, value: T) {
+      this.db[id] = value
+    }
+    get(id: string): T {
+      return this.db[id]
+    }
+    getObject(): object {
+      return this.db
+    }
+  }
+}
