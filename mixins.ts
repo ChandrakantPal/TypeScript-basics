@@ -53,8 +53,9 @@ sdb1.set('a', 'hello')
 
 type Constructor<T> = new (...args: any[]) => T
 
+// Base is type  T and T must extend Constructor
+// Constructor has it own generic T
 // Constructor<{ getObject(): object  }> to make sure extended class has getObject method
-
 function Dumpable<
   T extends Constructor<{
     getObject(): object
