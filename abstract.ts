@@ -19,4 +19,4 @@ class Ryu extends StreetFighter {
 
 const ryu = new Ryu()
 
-console.log(ryu.getSpecialAttack())
+ryu.fight()
