@@ -1,6 +1,7 @@
 type MyFlexibleDogInfo = {
   name: string
-} & Record<string, string>
+  [key: string]: string | number
+}
 
 const dog: MyFlexibleDogInfo = {
   name: 'LG',
