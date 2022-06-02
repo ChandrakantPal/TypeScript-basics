@@ -33,5 +33,7 @@ class ChunLi extends StreetFighter {
 }
 
 const ryu = new Ryu()
+const chunli = new ChunLi()
 
 ryu.fight()
+chunli.fight()
