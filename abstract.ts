@@ -14,3 +14,7 @@ class Ryu extends StreetFighter {
     return 'Hadoken'
   }
 }
+
+const ryu = new Ryu()
+
+console.log(ryu.getSpecialAttack())
