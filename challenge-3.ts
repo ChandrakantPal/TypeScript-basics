@@ -2,7 +2,15 @@ type FilterFunction<T> = (data: T[keyof T]) => boolean
 type Filters<T> = Record<keyof T, FilterFunction<T>[]>
 class EventProcessor<T extends {}> {
   private filters: Filters<T> = <Filters<T>>{}
-  handleEvent<K extends keyof T>(eventName: T, data: T[K]): void {}
+  handleEvent<K extends keyof T>(eventName: K, data: T[K]): void {
+    let allowEvent = true
+    for (const filter of this.filters[eventName] ?? []) {
+      if (!filter(data)) {
+        allowEvent = false
+        break
+      }
+    }
+  }
 
   addFilter<K extends keyof T>(eventName: K, filter: FilterFunction<T>): void {
     this.filters[eventName] ||= []
