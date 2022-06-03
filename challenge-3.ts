@@ -15,6 +15,10 @@ class EventProcessor<T extends {}> {
       }
     }
     if (allowEvent) {
+      let mappedData = { ...data }
+      for (const map of this.maps[eventName] ?? []) {
+        mappedData = <T[K]>map(mappedData)
+      }
     }
   }
 
