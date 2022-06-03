@@ -1,4 +1,7 @@
+type FilterFunction<T> = (data: T[keyof T]) => boolean
+type Filters<T> = Record<keyof T, FilterFunction<T>[]>
 class EventProcessor<T extends {}> {
+  private filters: Filters<T> = <Filters<T>>{}
   handleEvent<K extends keyof T>(eventName: T, data: T[K]): void {}
 
   addFilter<K extends keyof T>(
