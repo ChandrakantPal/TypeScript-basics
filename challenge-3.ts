@@ -6,9 +6,11 @@ type ProcessedEvent<T> = {
   eventName: keyof T
   data: T[keyof T]
 }
+
 class EventProcessor<T extends {}> {
   private filters: Filters<T> = <Filters<T>>{}
   private maps: Maps<T> = <Maps<T>>{}
+  private processed: ProcessedEvent<T>[] = []
 
   handleEvent<K extends keyof T>(eventName: K, data: T[K]): void {
     let allowEvent = true
@@ -23,20 +25,29 @@ class EventProcessor<T extends {}> {
       for (const map of this.maps[eventName] ?? []) {
         mappedData = <T[K]>map(mappedData)
       }
+      this.processed.push({
+        eventName,
+        data: mappedData,
+      })
     }
   }
 
-  addFilter<K extends keyof T>(eventName: K, filter: FilterFunction<T>): void {
-    this.filters[eventName] ||= []
-    this.filters[eventName].push(filter)
+  addFilter<K extends keyof T>(
+    eventName: K,
+    filter: (data: T[K]) => boolean
+  ): void {
+    this.filters[<keyof T>eventName] ||= []
+    this.filters[<keyof T>eventName].push(filter as FilterFunction<T>)
   }
 
-  addMap<K extends keyof T>(eventName: K, map: MapFunction<T>): void {
-    this.maps[eventName] ||= []
-    this.maps[eventName].push(map)
+  addMap<K extends keyof T>(eventName: K, map: (data: T[K]) => T[K]): void {
+    this.maps[<keyof T>eventName] ||= []
+    this.maps[<keyof T>eventName].push(map as unknown as MapFunction<T>)
   }
 
-  getProcessedEvents() {}
+  getProcessedEvents() {
+    return this.processed
+  }
 }
 
 interface EventMap {
@@ -56,7 +67,6 @@ uep.addMap('login', (data) => ({
 }))
 
 uep.handleEvent('login', {
-  user: null,
   name: 'jack',
 })
 uep.handleEvent('login', {
@@ -70,12 +80,12 @@ uep.handleEvent('logout', {
 console.log(uep.getProcessedEvents())
 
 /*
-  Result:
-  [
-    {
-      eventName: 'login',
-      data: { user: 'tom', name: 'tomas', hasSession: true }
-    },
-    { eventName: 'logout', data: { user: 'tom' } }
-  ]
-  */
+Result:
+[
+  {
+    eventName: 'login',
+    data: { user: 'tom', name: 'tomas', hasSession: true }
+  },
+  { eventName: 'logout', data: { user: 'tom' } }
+]
+*/
