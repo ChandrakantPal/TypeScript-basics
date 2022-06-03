@@ -4,6 +4,8 @@ type MapFunction<T> = (data: T[keyof T]) => T[keyof T]
 type Maps<T> = Record<keyof T, MapFunction<T>[]>
 class EventProcessor<T extends {}> {
   private filters: Filters<T> = <Filters<T>>{}
+  private maps: Maps<T> = <Maps<T>>{}
+
   handleEvent<K extends keyof T>(eventName: K, data: T[K]): void {
     let allowEvent = true
     for (const filter of this.filters[eventName] ?? []) {
@@ -21,7 +23,10 @@ class EventProcessor<T extends {}> {
     this.filters[eventName].push(filter)
   }
 
-  addMap<K extends keyof T>(eventName: K, map: (data: T[K]) => T[K]): void {}
+  addMap<K extends keyof T>(eventName: K, map: MapFunction<T>): void {
+    this.maps[eventName] ||= []
+    this.maps[eventName].push(map)
+  }
 
   getProcessedEvents() {}
 }
