@@ -4,10 +4,10 @@ class EventProcessor<T extends {}> {
   private filters: Filters<T> = <Filters<T>>{}
   handleEvent<K extends keyof T>(eventName: T, data: T[K]): void {}
 
-  addFilter<K extends keyof T>(
-    eventName: K,
-    filter: (data: T[K]) => boolean
-  ): void {}
+  addFilter<K extends keyof T>(eventName: K, filter: FilterFunction<T>): void {
+    this.filters[eventName] ||= []
+    this.filters[eventName].push(filter)
+  }
 
   addMap<K extends keyof T>(eventName: K, map: (data: T[K]) => T[K]): void {}
 
