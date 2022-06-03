@@ -1,5 +1,7 @@
 type FilterFunction<T> = (data: T[keyof T]) => boolean
 type Filters<T> = Record<keyof T, FilterFunction<T>[]>
+type MapFunction<T> = (data: T[keyof T]) => T[keyof T]
+type Maps<T> = Record<keyof T, MapFunction<T>[]>
 class EventProcessor<T extends {}> {
   private filters: Filters<T> = <Filters<T>>{}
   handleEvent<K extends keyof T>(eventName: K, data: T[K]): void {
@@ -9,6 +11,8 @@ class EventProcessor<T extends {}> {
         allowEvent = false
         break
       }
+    }
+    if (allowEvent) {
     }
   }
 
