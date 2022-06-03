@@ -2,6 +2,10 @@ type FilterFunction<T> = (data: T[keyof T]) => boolean
 type Filters<T> = Record<keyof T, FilterFunction<T>[]>
 type MapFunction<T> = (data: T[keyof T]) => T[keyof T]
 type Maps<T> = Record<keyof T, MapFunction<T>[]>
+type ProcessedEvent<T> = {
+  eventName: keyof T
+  data: T[keyof T]
+}
 class EventProcessor<T extends {}> {
   private filters: Filters<T> = <Filters<T>>{}
   private maps: Maps<T> = <Maps<T>>{}
