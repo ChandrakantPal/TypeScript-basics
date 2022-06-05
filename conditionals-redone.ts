@@ -30,10 +30,7 @@ function fetchPokemon(
 fetchPokemon('https://pokeapi.co/api/v2/pokemon?limit=10', (data) => {
   data.results.forEach(({ name }) => console.log(name))
 })
-
 ;(async function () {
-  const data = <PokemonResults>(
-    await fetchPokemon('https://pokeapi.co/api/v2/pokemon?limit=10')
-  )
+  const data = await fetchPokemon('https://pokeapi.co/api/v2/pokemon?limit=10')
   data.results.forEach(({ name }) => console.log(name))
 })()
