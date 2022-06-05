@@ -27,9 +27,9 @@ function fetchPokemon(
   }
 }
 
-// fetchPokemon("https://pokeapi.co/api/v2/pokemon?limit=10", (data) => {
-//   data.results.forEach(({ name }) => console.log(name));
-// });
+fetchPokemon('https://pokeapi.co/api/v2/pokemon?limit=10', (data) => {
+  data.results.forEach(({ name }) => console.log(name))
+})
 
 ;(async function () {
   const data = <PokemonResults>(
