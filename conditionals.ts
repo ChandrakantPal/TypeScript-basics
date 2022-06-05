@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+
 interface PokemonResults {
   count: number
   next?: string
@@ -9,26 +10,29 @@ interface PokemonResults {
   }[]
 }
 
-// conditionals
-type FetchPokemonResult<T> = T extends undefined
-  ? Promise<PokemonResults>
-  : void
+type fetchURLReturn<T> = T extends undefined ? Promise<PokemonResults> : void
 
 function fetchPokemon<T extends undefined | ((data: PokemonResults) => void)>(
   url: string,
   cb?: T
-): FetchPokemonResult<T> {
+): fetchURLReturn<T> {
   if (cb) {
     fetch(url)
-      .then((resp) => resp.json())
-      .then((data) => cb(data as PokemonResults))
-    return undefined as FetchPokemonResult<T>
+      .then((data) => data.json())
+      .then((data) => cb(data))
+    return undefined as fetchURLReturn<T>
   } else {
-    return fetch(url).then((resp) => resp.json()) as FetchPokemonResult<T>
+    return fetch(url).then((data) => data.json()) as fetchURLReturn<T>
   }
 }
 
-fetchPokemon('https://pokeapi.co/api/v2/pokemon?limit=10', (data) => {
+// fetchPokemon("https://pokeapi.co/api/v2/pokemon?limit=10", (data) => {
+//   data.results.forEach(({ name }) => console.log(name));
+// });
+
+;(async function () {
+  const data = <PokemonResults>(
+    await fetchPokemon('https://pokeapi.co/api/v2/pokemon?limit=10')
+  )
   data.results.forEach(({ name }) => console.log(name))
-  //   console.log(data)
-})
+})()
