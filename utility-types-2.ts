@@ -26,3 +26,10 @@ class PersonWithFullName {
     return `${this.name.first} ${this.name.last}`
   }
 }
+
+function createObjects<T extends new (...args: any[]) => any>(
+  ObjectType: T,
+  data: ConstructorParameters<T>[0][]
+): InstanceType<T>[] {
+  return data.map((item) => new ObjectType(item))
+}
