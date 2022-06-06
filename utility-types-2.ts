@@ -18,3 +18,11 @@ function permuteRows<T extends (...args: any[]) => any>(
 }
 
 console.log(permuteRows(addFullName, [{ first: 'sanjay', last: 'pal' }]))
+
+class PersonWithFullName {
+  constructor(public name: Name) {}
+
+  get fullName() {
+    return `${this.name.first} ${this.name.last}`
+  }
+}
