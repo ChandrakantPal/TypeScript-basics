@@ -16,3 +16,5 @@ function permuteRows<T extends (...args: any[]) => any>(
 ): ReturnType<T>[] {
   return data.map(iteratorFuunc)
 }
+
+console.log(permuteRows(addFullName, [{ first: 'sanjay', last: 'pal' }]))
