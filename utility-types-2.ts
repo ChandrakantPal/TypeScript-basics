@@ -33,3 +33,9 @@ function createObjects<T extends new (...args: any[]) => any>(
 ): InstanceType<T>[] {
   return data.map((item) => new ObjectType(item))
 }
+
+console.log(
+  createObjects(PersonWithFullName, [{ first: 'sanjay', last: 'pal' }]).map(
+    (obj) => obj.fullName
+  )
+)
