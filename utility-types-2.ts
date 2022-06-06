@@ -10,7 +10,9 @@ function addFullName(name: Name): Name & { fullName: string } {
   }
 }
 
-function permuteRows<T>(
+function permuteRows<T extends (...args: any[]) => any>(
   iteratorFuunc: T,
   data: Parameters<T>[0][]
-): ReturnType<T>[] {}
+): ReturnType<T>[] {
+  return data.map(iteratorFuunc)
+}
