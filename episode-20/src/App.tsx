@@ -9,10 +9,15 @@ const Box: React.FunctionComponent<React.PropsWithChildren> = ({
   children,
 }) => <div style={{ padding: '1rem', fontWeight: 'bold' }}>{children}</div>
 
-const List: React.FC<{ items: string[] }> = ({ items }) => (
+const List: React.FC<{ items: string[]; onClick?: (item: string) => void }> = ({
+  items,
+  onClick,
+}) => (
   <ul>
     {items.map((item, index) => (
-      <li key={`${index}-${item}`}>{item}</li>
+      <li key={`${index}-${item}`} onClick={() => onClick?.(item)}>
+        {item}
+      </li>
     ))}
   </ul>
 )
