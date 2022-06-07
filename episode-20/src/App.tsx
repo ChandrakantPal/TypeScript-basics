@@ -23,11 +23,15 @@ const List: React.FC<{ items: string[]; onClick?: (item: string) => void }> = ({
 )
 
 function App() {
+  const onListClick = React.useCallback((item: string) => {
+    alert(item)
+  }, [])
+
   return (
     <div>
       <Heading title="Introduction" />
       <Box>Hello there</Box>
-      <List items={['one', 'two', 'three']} />
+      <List items={['one', 'two', 'three']} onClick={onListClick} />
     </div>
   )
 }
