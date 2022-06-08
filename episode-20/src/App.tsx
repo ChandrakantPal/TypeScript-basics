@@ -32,12 +32,20 @@ function App() {
   }, [])
 
   const [payload, setPayload] = React.useState<Payload | null>(null)
+  React.useEffect(() => {
+    fetch('/data.json')
+      .then((resp) => resp.json())
+      .then((data) => {
+        setPayload(data)
+      })
+  }, [])
 
   return (
     <div>
       <Heading title="Introduction" />
       <Box>Hello there</Box>
       <List items={['one', 'two', 'three']} onClick={onListClick} />
+      <Box>{JSON.stringify(payload)}</Box>
     </div>
   )
 }
