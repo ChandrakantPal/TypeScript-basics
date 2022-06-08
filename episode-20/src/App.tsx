@@ -34,9 +34,14 @@ interface Todo {
 
 type ActionType = { type: 'ADD'; text: string } | { type: 'REMOVE'; id: number }
 
+const useNumber = (initialValue: number) => React.useState<number>(initialValue)
+
+type UseNumberValue = ReturnType<typeof useNumber>[0]
+type UseNumberSetValue = ReturnType<typeof useNumber>[1]
+
 const Incrementer: React.FunctionComponent<{
-  value: number
-  setValue: React.Dispatch<React.SetStateAction<number>>
+  value: UseNumberValue
+  setValue: UseNumberSetValue
 }> = ({ value, setValue }) => (
   <button onClick={() => setValue(value + 1)}>Add - {value}</button>
 )
