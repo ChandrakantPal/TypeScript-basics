@@ -95,7 +95,7 @@ function App() {
     }
   }, [])
 
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = useNumber(0)
 
   return (
     <div>
