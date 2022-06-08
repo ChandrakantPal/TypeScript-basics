@@ -24,12 +24,26 @@ const List: React.FC<{ items: string[]; onClick?: (item: string) => void }> = ({
 
 const Button: React.FunctionComponent<
   React.PropsWithChildren<
-    React.DetailedHTMLFactory<
+    React.DetailedHTMLProps<
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
-    >
+    > & {
+      title?: string
+    }
   >
-> = ({ children, ...rest }) => <button {...rest}>{children}</button>
+> = ({ title, children, style, ...rest }) => (
+  <button
+    {...rest}
+    style={{
+      ...style,
+      backgroundColor: 'red',
+      color: 'white',
+      fontSize: 'xx-large',
+    }}
+  >
+    {title ?? children}
+  </button>
+)
 
 interface Payload {
   text: string
@@ -52,7 +66,12 @@ const Incrementer: React.FunctionComponent<{
   value: UseNumberValue
   setValue: UseNumberSetValue
 }> = ({ value, setValue }) => (
-  <button onClick={() => setValue(value + 1)}>Add - {value}</button>
+  <Button
+    onClick={() => {
+      setValue(value + 1)
+    }}
+    title={`Add - ${value}`}
+  />
 )
 
 function App() {
@@ -117,7 +136,7 @@ function App() {
       {todos?.map((todo) => (
         <div key={todo.id}>
           {todo.text}
-          <button
+          <Button
             onClick={() =>
               dispatch({
                 type: 'REMOVE',
@@ -126,12 +145,12 @@ function App() {
             }
           >
             Remove
-          </button>
+          </Button>
         </div>
       ))}
       <div>
         <input type="text" ref={newTodoRef} />
-        <button onClick={onAddTodo}>Add Todo</button>
+        <Button onClick={onAddTodo}>Add Todo</Button>
       </div>
     </div>
   )
