@@ -50,13 +50,13 @@ function App() {
   }, [])
 
   const [todos, dispatch] = React.useReducer(
-    (state: Todo[], action: ActionType): Todo[] => {
+    (state: Todo[], action: ActionType) => {
       switch (action.type) {
         case 'ADD':
           return [
-            ...todos,
+            ...state,
             {
-              id: todos.length,
+              id: state.length,
               text: action.text,
               done: false,
             },
@@ -91,7 +91,7 @@ function App() {
       <Box>{JSON.stringify(payload)}</Box>
 
       <Heading title="Todos" />
-      {todos.map((todo) => (
+      {todos?.map((todo) => (
         <div key={todo.id}>
           {todo.text}
           <button
