@@ -34,6 +34,13 @@ interface Todo {
 
 type ActionType = { type: 'ADD'; text: string } | { type: 'REMOVE'; id: number }
 
+const Incrementer: React.FunctionComponent<{
+  value: number
+  setValue: React.Dispatch<React.SetStateAction<number>>
+}> = ({ value, setValue }) => (
+  <button onClick={() => setValue(value + 1)}>Add - {value}</button>
+)
+
 function App() {
   const onListClick = React.useCallback((item: string) => {
     alert(item)
@@ -82,6 +89,8 @@ function App() {
       newTodoRef.current.value = ''
     }
   }, [])
+
+  const [value, setValue] = React.useState(0)
 
   return (
     <div>
