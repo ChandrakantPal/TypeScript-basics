@@ -26,12 +26,21 @@ interface Payload {
   text: string
 }
 
+interface Todo {
+  id: number
+  done: boolean
+  text: string
+}
+
+type ActionType = { type: 'ADD'; text: string } | { type: 'REMOVE'; id: number }
+
 function App() {
   const onListClick = React.useCallback((item: string) => {
     alert(item)
   }, [])
 
   const [payload, setPayload] = React.useState<Payload | null>(null)
+
   React.useEffect(() => {
     fetch('/data.json')
       .then((resp) => resp.json())
@@ -39,6 +48,27 @@ function App() {
         setPayload(data)
       })
   }, [])
+
+  const [todos, dispatch] = React.useReducer(
+    (state: Todo[], action: ActionType): Todo[] => {
+      switch (action.type) {
+        case 'ADD':
+          return [
+            ...todos,
+            {
+              id: todos.length,
+              text: action.text,
+              done: false,
+            },
+          ]
+        case 'REMOVE':
+          return state.filter(({ id }) => id !== action.id)
+        default:
+          throw new Error()
+      }
+    },
+    []
+  )
 
   return (
     <div>
