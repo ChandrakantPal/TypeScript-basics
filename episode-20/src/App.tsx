@@ -70,6 +70,19 @@ function App() {
     []
   )
 
+  // Experimental storing the value in ref to avoid state change
+  const newTodoRef = React.useRef<HTMLInputElement>(null)
+
+  const onAddTodo = React.useCallback(() => {
+    if (newTodoRef.current) {
+      dispatch({
+        type: 'ADD',
+        text: newTodoRef.current.value,
+      })
+      newTodoRef.current.value = ''
+    }
+  }, [])
+
   return (
     <div>
       <Heading title="Introduction" />
@@ -93,6 +106,10 @@ function App() {
           </button>
         </div>
       ))}
+      <div>
+        <input type="text" ref={newTodoRef} />
+        <button onClick={onAddTodo}>Add Todo</button>
+      </div>
     </div>
   )
 }
