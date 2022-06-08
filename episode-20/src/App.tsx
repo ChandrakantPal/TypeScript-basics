@@ -31,7 +31,7 @@ function App() {
     alert(item)
   }, [])
 
-  const [payload, setPayload] = React.useState(null)
+  const [payload, setPayload] = React.useState<Payload | null>(null)
 
   return (
     <div>
