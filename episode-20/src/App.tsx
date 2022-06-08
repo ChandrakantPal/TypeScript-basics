@@ -98,7 +98,7 @@ function App() {
       <Box>Hello there</Box>
       <List items={['one', 'two', 'three']} onClick={onListClick} />
       <Box>{JSON.stringify(payload)}</Box>
-
+      <Incrementer value={value} setValue={setValue} />
       <Heading title="Todos" />
       {todos?.map((todo) => (
         <div key={todo.id}>
