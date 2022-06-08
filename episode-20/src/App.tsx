@@ -76,6 +76,23 @@ function App() {
       <Box>Hello there</Box>
       <List items={['one', 'two', 'three']} onClick={onListClick} />
       <Box>{JSON.stringify(payload)}</Box>
+
+      <Heading title="Todos" />
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          {todo.text}
+          <button
+            onClick={() =>
+              dispatch({
+                type: 'REMOVE',
+                id: todo.id,
+              })
+            }
+          >
+            Remove
+          </button>
+        </div>
+      ))}
     </div>
   )
 }
