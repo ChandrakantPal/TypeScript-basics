@@ -22,6 +22,15 @@ const List: React.FC<{ items: string[]; onClick?: (item: string) => void }> = ({
   </ul>
 )
 
+const Button: React.FunctionComponent<
+  React.PropsWithChildren<
+    React.DetailedHTMLFactory<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      HTMLButtonElement
+    >
+  >
+> = ({ children, ...rest }) => <button {...rest}>{children}</button>
+
 interface Payload {
   text: string
 }
