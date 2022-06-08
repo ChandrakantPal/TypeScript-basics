@@ -22,10 +22,16 @@ const List: React.FC<{ items: string[]; onClick?: (item: string) => void }> = ({
   </ul>
 )
 
+interface Payload {
+  text: string
+}
+
 function App() {
   const onListClick = React.useCallback((item: string) => {
     alert(item)
   }, [])
+
+  const [payload, setPayload] = React.useState(null)
 
   return (
     <div>
