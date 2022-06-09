@@ -1,5 +1,6 @@
 import * as React from 'react'
 import './App.css'
+import { useTodos } from './useTodos'
 
 const Heading: React.FunctionComponent<{ title: string }> = ({ title }) => (
   <h2>{title}</h2>
@@ -32,67 +33,34 @@ const Button: React.FunctionComponent<
   </button>
 )
 
-interface Todo {
-  id: number
-  done: boolean
-  text: string
-}
-
-type ActionType = { type: 'ADD'; text: string } | { type: 'REMOVE'; id: number }
-
 function App() {
-  const [todos, dispatch] = React.useReducer(
-    (state: Todo[], action: ActionType) => {
-      switch (action.type) {
-        case 'ADD':
-          return [
-            ...state,
-            {
-              id: state.length,
-              text: action.text,
-              done: false,
-            },
-          ]
-        case 'REMOVE':
-          return state.filter(({ id }) => id !== action.id)
-        default:
-          throw new Error()
-      }
+  const { todos, addTodo, removeTodo } = useTodos([
+    {
+      id: 0,
+      text: 'Hey there',
+      done: false,
     },
-    []
-  )
+  ])
 
   // Experimental storing the value in ref to avoid state change
   const newTodoRef = React.useRef<HTMLInputElement>(null)
 
   const onAddTodo = React.useCallback(() => {
     if (newTodoRef.current) {
-      dispatch({
-        type: 'ADD',
-        text: newTodoRef.current.value,
-      })
+      addTodo(newTodoRef.current.value)
       newTodoRef.current.value = ''
     }
-  }, [])
+  }, [addTodo])
 
   return (
     <div>
       <Heading title="Introduction" />
       <Box>Hello there</Box>
       <Heading title="Todos" />
-      {todos?.map((todo) => (
+      {todos.map((todo) => (
         <div key={todo.id}>
           {todo.text}
-          <Button
-            onClick={() =>
-              dispatch({
-                type: 'REMOVE',
-                id: todo.id,
-              })
-            }
-          >
-            Remove
-          </Button>
+          <Button onClick={() => removeTodo(todo.id)}>Remove</Button>
         </div>
       ))}
       <div>
