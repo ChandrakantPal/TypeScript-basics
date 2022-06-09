@@ -11,6 +11,7 @@ type ActionType = { type: 'ADD'; text: string } | { type: 'REMOVE'; id: number }
 export function useTodos(initialTodos: Todo[]): {
   todos: Todo[]
   addTodo: (text: string) => void
+  removeTodo: (id: number) => void
 } {
   const [todos, dispatch] = React.useReducer(
     (state: Todo[], action: ActionType) => {
@@ -35,5 +36,8 @@ export function useTodos(initialTodos: Todo[]): {
   const addTodo = React.useCallback((text: string) => {
     dispatch({ type: 'ADD', text })
   }, [])
-  return { todos, addTodo }
+  const removeTodo = React.useCallback((id: number) => {
+    dispatch({ type: 'REMOVE', id })
+  }, [])
+  return { todos, addTodo, removeTodo }
 }
