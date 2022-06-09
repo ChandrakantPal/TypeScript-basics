@@ -8,7 +8,10 @@ interface Todo {
 
 type ActionType = { type: 'ADD'; text: string } | { type: 'REMOVE'; id: number }
 
-export function useTodos(initialTodos: Todo[]) {
+export function useTodos(initialTodos: Todo[]): {
+  todos: Todo[]
+  addTodo: (text: string) => void
+} {
   const [todos, dispatch] = React.useReducer(
     (state: Todo[], action: ActionType) => {
       switch (action.type) {
@@ -29,5 +32,8 @@ export function useTodos(initialTodos: Todo[]) {
     },
     initialTodos
   )
-  return [todos, dispatch]
+  const addTodo = React.useCallback((text: string) => {
+    dispatch({ type: 'ADD', text })
+  }, [])
+  return { todos, addTodo }
 }
