@@ -33,6 +33,8 @@ const Button: React.FunctionComponent<
   </button>
 )
 
+function UL() {}
+
 function App() {
   const { todos, addTodo, removeTodo } = useTodos([
     {
