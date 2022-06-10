@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import './App.css'
-import { useTodos } from './useTodos'
+import { useTodos, TodosProvider } from './useTodos'
 
 const Heading: React.FunctionComponent<{ title: string }> = ({ title }) => (
   <h2>{title}</h2>
@@ -100,15 +100,25 @@ function App() {
 }
 
 const AppWrapper = () => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: '50% 50%',
-    }}
+  <TodosProvider
+    initialTodos={[
+      {
+        id: 0,
+        text: 'Hey there useContext',
+        done: false,
+      },
+    ]}
   >
-    <App />
-    <App />
-  </div>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '50% 50%',
+      }}
+    >
+      <App />
+      <App />
+    </div>
+  </TodosProvider>
 )
 
 export default AppWrapper
