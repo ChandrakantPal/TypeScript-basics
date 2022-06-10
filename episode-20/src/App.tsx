@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { render } from 'react-dom'
 import './App.css'
 import { useTodos } from './useTodos'
 
@@ -33,7 +34,21 @@ const Button: React.FunctionComponent<
   </button>
 )
 
-function UL() {}
+function UL<T>({
+  items,
+  render,
+}: {
+  items: T[]
+  render: (item: T) => React.ReactNode
+}) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{render(item)}</li>
+      ))}
+    </ul>
+  )
+}
 
 function App() {
   const { todos, addTodo, removeTodo } = useTodos([
