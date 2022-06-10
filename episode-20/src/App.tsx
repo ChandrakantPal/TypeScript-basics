@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import './App.css'
-import { useTodos, TodosProvider } from './useTodos'
+import { useTodos, useAddTodo, useRemoveTodo, TodosProvider } from './useTodos'
 
 const Heading: React.FunctionComponent<{ title: string }> = ({ title }) => (
   <h2>{title}</h2>
@@ -58,13 +58,9 @@ function UL<T>({
 }
 
 function App() {
-  const { todos, addTodo, removeTodo } = useTodos([
-    {
-      id: 0,
-      text: 'Hey there',
-      done: false,
-    },
-  ])
+  const todos = useTodos()
+  const addTodo = useAddTodo()
+  const removeTodo = useRemoveTodo()
 
   // Experimental storing the value in ref to avoid state change
   const newTodoRef = React.useRef<HTMLInputElement>(null)
