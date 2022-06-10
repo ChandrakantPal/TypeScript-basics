@@ -74,6 +74,15 @@ function App() {
       <Heading title="Introduction" />
       <Box>Hello there</Box>
       <Heading title="Todos" />
+      <UL
+        items={todos}
+        render={(todo) => (
+          <>
+            {todo.text}
+            <button onClick={() => removeTodo(todo.id)}>Remove</button>
+          </>
+        )}
+      />
       {todos.map((todo) => (
         <div key={todo.id}>
           {todo.text}
