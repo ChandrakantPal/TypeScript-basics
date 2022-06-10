@@ -8,7 +8,15 @@ interface Todo {
 
 type ActionType = { type: 'ADD'; text: string } | { type: 'REMOVE'; id: number }
 
-export function useTodos(initialTodos: Todo[]): {
+type UseTodosManagerType = ReturnType<typeof useTodosManager>
+
+const TodoContext = React.createContext<UseTodosManagerType>({
+  todos: [],
+  addTodo: () => {},
+  removeTodo: () => {},
+})
+
+export function useTodosManager(initialTodos: Todo[]): {
   todos: Todo[]
   addTodo: (text: string) => void
   removeTodo: (id: number) => void
