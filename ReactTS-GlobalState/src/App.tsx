@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { render } from 'react-dom'
 import './App.css'
-import { useTodos, useAddTodo, useRemoveTodo, TodosProvider } from './useTodos'
+import { useTodos } from './useTodos'
 
 const Heading: React.FunctionComponent<{ title: string }> = ({ title }) => (
   <h2>{title}</h2>
@@ -34,33 +33,16 @@ const Button: React.FunctionComponent<
   </button>
 )
 
-function UL<T>({
-  items,
-  render,
-  itemClick,
-}: React.DetailedHTMLProps<
-  React.HTMLAttributes<HTMLUListElement>,
-  HTMLUListElement
-> & {
-  items: T[]
-  render: (item: T) => React.ReactNode
-  itemClick: (item: T) => void
-}) {
-  return (
-    <ul>
-      {items.map((item, index) => (
-        <li onClick={() => itemClick(item)} key={index}>
-          {render(item)}
-        </li>
-      ))}
-    </ul>
-  )
-}
+const initialTodos = [
+  {
+    id: 0,
+    text: 'Hey there',
+    done: false,
+  },
+]
 
 function App() {
-  const todos = useTodos()
-  const addTodo = useAddTodo()
-  const removeTodo = useRemoveTodo()
+  const { todos, addTodo, removeTodo } = useTodos(initialTodos)
 
   // Experimental storing the value in ref to avoid state change
   const newTodoRef = React.useRef<HTMLInputElement>(null)
@@ -77,16 +59,12 @@ function App() {
       <Heading title="Introduction" />
       <Box>Hello there</Box>
       <Heading title="Todos" />
-      <UL
-        items={todos}
-        itemClick={(item) => alert(item.id)}
-        render={(todo) => (
-          <>
-            {todo.text}
-            <button onClick={() => removeTodo(todo.id)}>Remove</button>
-          </>
-        )}
-      />
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          {todo.text}
+          <button onClick={() => removeTodo(todo.id)}>Remove</button>
+        </div>
+      ))}
       <div>
         <input type="text" ref={newTodoRef} />
         <Button onClick={onAddTodo}>Add Todo</Button>
@@ -95,38 +73,27 @@ function App() {
   )
 }
 
-const JustShowTodos = () => {
-  const todos = useTodos()
-
+const JustTheTodos = () => {
+  const { todos, addTodo, removeTodo } = useTodos(initialTodos)
   return (
-    <UL
-      items={todos}
-      itemClick={(item) => alert(item.id)}
-      render={(todo) => <>{todo.text}</>}
-    />
+    <>
+      {todos.map((todo) => (
+        <div key={todo.id}>{todo.text}</div>
+      ))}
+    </>
   )
 }
 
 const AppWrapper = () => (
-  <TodosProvider
-    initialTodos={[
-      {
-        id: 0,
-        text: 'Hey there useContext',
-        done: false,
-      },
-    ]}
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: '50% 50%',
+    }}
   >
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '50% 50%',
-      }}
-    >
-      <App />
-      <JustShowTodos />
-    </div>
-  </TodosProvider>
+    <App />
+    <JustTheTodos />
+  </div>
 )
 
 export default AppWrapper
