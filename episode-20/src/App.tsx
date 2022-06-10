@@ -49,7 +49,9 @@ function UL<T>({
   return (
     <ul>
       {items.map((item, index) => (
-        <li key={index}>{render(item)}</li>
+        <li onClick={() => itemClick(item)} key={index}>
+          {render(item)}
+        </li>
       ))}
     </ul>
   )
