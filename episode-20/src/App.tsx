@@ -95,6 +95,18 @@ function App() {
   )
 }
 
+const JustShowTodos = () => {
+  const todos = useTodos()
+
+  return (
+    <UL
+      items={todos}
+      itemClick={(item) => alert(item.id)}
+      render={(todo) => <>{todo.text}</>}
+    />
+  )
+}
+
 const AppWrapper = () => (
   <TodosProvider
     initialTodos={[
@@ -112,7 +124,7 @@ const AppWrapper = () => (
       }}
     >
       <App />
-      <App />
+      <JustShowTodos />
     </div>
   </TodosProvider>
 )
