@@ -83,6 +83,7 @@ function App() {
       <Heading title="Todos" />
       <UL
         items={todos}
+        itemClick={(item) => alert(item.id)}
         render={(todo) => (
           <>
             {todo.text}
