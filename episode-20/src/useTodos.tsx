@@ -59,3 +59,18 @@ export const TodosProvider: React.FunctionComponent<
     {children}
   </TodoContext.Provider>
 )
+
+export const useTodos = (): Todo[] => {
+  const { todos } = React.useContext(TodoContext)
+  return todos
+}
+
+export const useAddTodo = (): UseTodosManagerType['addTodo'] => {
+  const { addTodo } = React.useContext(TodoContext)
+  return addTodo
+}
+
+export const useRemoveTodo = (): UseTodosManagerType['removeTodo'] => {
+  const { removeTodo } = React.useContext(TodoContext)
+  return removeTodo
+}
