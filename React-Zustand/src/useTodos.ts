@@ -21,7 +21,7 @@ const useTodos = create<{
   ],
   addTodo: (text: string) =>
     set((state) => ({
-      ...state.todos,
+      ...state,
       todos: [
         ...state.todos,
         {
