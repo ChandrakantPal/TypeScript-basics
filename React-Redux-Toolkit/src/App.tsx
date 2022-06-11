@@ -1,8 +1,7 @@
 import * as React from 'react'
 import './App.css'
-import { Provider } from 'react-redux'
-import { store } from './store'
-import { useTodos } from './useTodos'
+import { Provider, useDispatch, useSelector } from 'react-redux'
+import { store, selectTodos, addTodo, removeTodo } from './store'
 
 const Heading: React.FunctionComponent<{ title: string }> = ({ title }) => (
   <h2>{title}</h2>
@@ -35,38 +34,60 @@ const Button: React.FunctionComponent<
   </button>
 )
 
-const initialTodos = [
-  {
-    id: 0,
-    text: 'Hey there',
-    done: false,
-  },
-]
+function UL<T>({
+  items,
+  render,
+  itemClick,
+}: React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLUListElement>,
+  HTMLUListElement
+> & {
+  items: T[]
+  render: (item: T) => React.ReactNode
+  itemClick: (item: T) => void
+}) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li onClick={() => itemClick(item)} key={index}>
+          {render(item)}
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 function App() {
-  const { todos, addTodo, removeTodo } = useTodos(initialTodos)
+  const todos = useSelector(selectTodos)
+  const dispatch = useDispatch()
 
   // Experimental storing the value in ref to avoid state change
   const newTodoRef = React.useRef<HTMLInputElement>(null)
 
   const onAddTodo = React.useCallback(() => {
     if (newTodoRef.current) {
-      addTodo(newTodoRef.current.value)
+      dispatch(addTodo(newTodoRef.current.value))
       newTodoRef.current.value = ''
     }
-  }, [addTodo])
+  }, [dispatch])
 
   return (
     <div>
       <Heading title="Introduction" />
       <Box>Hello there</Box>
       <Heading title="Todos" />
-      {todos.map((todo) => (
-        <div key={todo.id}>
-          {todo.text}
-          <button onClick={() => removeTodo(todo.id)}>Remove</button>
-        </div>
-      ))}
+      <UL
+        items={todos}
+        itemClick={(item) => {}}
+        render={(todo) => (
+          <div key={todo.id}>
+            {todo.text}
+            <button onClick={() => dispatch(removeTodo(todo.id))}>
+              Remove
+            </button>
+          </div>
+        )}
+      />
       <div>
         <input type="text" ref={newTodoRef} />
         <Button onClick={onAddTodo}>Add Todo</Button>
@@ -76,13 +97,14 @@ function App() {
 }
 
 const JustTheTodos = () => {
-  const { todos, addTodo, removeTodo } = useTodos(initialTodos)
+  const todos = useSelector(selectTodos)
+
   return (
-    <>
-      {todos.map((todo) => (
-        <div key={todo.id}>{todo.text}</div>
-      ))}
-    </>
+    <UL
+      items={todos}
+      itemClick={() => {}}
+      render={(todo) => <div key={todo.id}>{todo.text}</div>}
+    />
   )
 }
 
