@@ -1,5 +1,7 @@
 import * as React from 'react'
 import './App.css'
+import { Provider } from 'react-redux'
+import { store } from './store'
 import { useTodos } from './useTodos'
 
 const Heading: React.FunctionComponent<{ title: string }> = ({ title }) => (
@@ -85,15 +87,17 @@ const JustTheTodos = () => {
 }
 
 const AppWrapper = () => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: '50% 50%',
-    }}
-  >
-    <App />
-    <JustTheTodos />
-  </div>
+  <Provider store={store}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '50% 50%',
+      }}
+    >
+      <App />
+      <JustTheTodos />
+    </div>
+  </Provider>
 )
 
 export default AppWrapper
