@@ -66,7 +66,7 @@ function App() {
 }
 
 const JustTheTodos = () => {
-  const { todos, addTodo, removeTodo } = useTodos(initialTodos)
+  const { todos } = useTodos((state) => state)
   return (
     <>
       {todos.map((todo) => (
