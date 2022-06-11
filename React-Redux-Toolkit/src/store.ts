@@ -15,7 +15,7 @@ const initialState: TodoSliceState = {
 }
 
 export const todosSlice = createSlice({
-  name: 'counter',
+  name: 'todos',
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<string>) => {
