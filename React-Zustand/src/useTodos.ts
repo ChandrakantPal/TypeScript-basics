@@ -9,6 +9,8 @@ interface Todo {
 
 const useTodos = create<{
   todos: Todo[]
+  addTodo: (text: string) => void
+  removeTodo: (removeId: number) => void
 }>((set) => ({
   todos: [
     {
