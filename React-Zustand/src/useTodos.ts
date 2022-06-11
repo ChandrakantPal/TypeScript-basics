@@ -10,7 +10,13 @@ interface Todo {
 const useTodos = create<{
   todos: Todo[]
 }>((set) => ({
-  todos: [],
+  todos: [
+    {
+      id: 0,
+      text: 'Hey there',
+      done: false,
+    },
+  ],
   addTodo: (text: string) =>
     set((state) => ({
       ...state.todos,
