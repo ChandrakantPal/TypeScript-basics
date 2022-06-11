@@ -1,6 +1,6 @@
 import * as React from 'react'
 import './App.css'
-import { useTodos } from './useTodos'
+import useTodos from './useTodos'
 
 const Heading: React.FunctionComponent<{ title: string }> = ({ title }) => (
   <h2>{title}</h2>
@@ -33,16 +33,8 @@ const Button: React.FunctionComponent<
   </button>
 )
 
-const initialTodos = [
-  {
-    id: 0,
-    text: 'Hey there',
-    done: false,
-  },
-]
-
 function App() {
-  const { todos, addTodo, removeTodo } = useTodos(initialTodos)
+  const { todos, addTodo, removeTodo } = useTodos((state) => state)
 
   // Experimental storing the value in ref to avoid state change
   const newTodoRef = React.useRef<HTMLInputElement>(null)
