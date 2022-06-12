@@ -8,8 +8,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@xstate/react": "^3.0.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "xstate": "^4.32.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
