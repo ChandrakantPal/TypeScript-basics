@@ -58,6 +58,13 @@ export function useTodos(initialTodos: Todo[]): {
 } {
   const [state, send] = useMachine(todoMachine)
 
+  React.useEffect(() => {
+    send({
+      type: 'SET_TODOS',
+      todos: initialTodos,
+    })
+  }, [])
+
   const addTodo = React.useCallback(
     (text: string) => {
       send({
