@@ -67,7 +67,7 @@ function App() {
     ],
     []
   )
-  const { todos, addTodo, removeTodo } = useTodos(initialTodos)
+  const { isEditing, todos, addTodo, removeTodo } = useTodos(initialTodos)
 
   // Experimental storing the value in ref to avoid state change
   const newTodoRef = React.useRef<HTMLInputElement>(null)
@@ -84,20 +84,26 @@ function App() {
       <Heading title="Introduction" />
       <Box>Hello there</Box>
       <Heading title="Todos" />
-      <UL
-        items={todos}
-        itemClick={(item) => {}}
-        render={(todo) => (
-          <div key={todo.id}>
-            ({todo.done ? 'Done' : 'Not Done'}){todo.text}
-            <button onClick={() => removeTodo(todo.id)}>Remove</button>
+      {isEditing && (
+        <>
+          <UL
+            items={todos}
+            itemClick={(item) => {}}
+            render={(todo) => (
+              <div key={todo.id}>
+                ({todo.done ? 'Done' : 'Not Done'}){todo.text}
+                <button onClick={() => removeTodo(todo.id)}>Remove</button>
+              </div>
+            )}
+          />
+          <div>
+            <input type="text" ref={newTodoRef} />
+            <Button onClick={onAddTodo}>Add Todo</Button>
           </div>
-        )}
-      />
-      <div>
-        <input type="text" ref={newTodoRef} />
-        <Button onClick={onAddTodo}>Add Todo</Button>
-      </div>
+          <Button>Start Working</Button>
+        </>
+      )}
+      {!isEditing && <Button>Stop Working</Button>}
     </div>
   )
 }
