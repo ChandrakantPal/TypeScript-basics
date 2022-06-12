@@ -67,7 +67,8 @@ function App() {
     ],
     []
   )
-  const { isEditing, todos, addTodo, removeTodo } = useTodos(initialTodos)
+  const { isEditing, todos, addTodo, removeTodo, startWorking, endWorking } =
+    useTodos(initialTodos)
 
   // Experimental storing the value in ref to avoid state change
   const newTodoRef = React.useRef<HTMLInputElement>(null)
@@ -100,10 +101,10 @@ function App() {
             <input type="text" ref={newTodoRef} />
             <Button onClick={onAddTodo}>Add Todo</Button>
           </div>
-          <Button>Start Working</Button>
+          <Button onClick={startWorking}>Start Working</Button>
         </>
       )}
-      {!isEditing && <Button>Stop Working</Button>}
+      {!isEditing && <Button onClick={endWorking}>Stop Working</Button>}
     </div>
   )
 }
