@@ -53,6 +53,16 @@ const todoMachine = createMachine<
       },
     },
     working: {
+      exit: assign({
+        todos: ({ todos }) => {
+          const newTodos = [...todos]
+          const undoneTodo = newTodos.find(({ done }) => !done)
+          if (undoneTodo) {
+            undoneTodo.done = true
+          }
+          return newTodos
+        },
+      }),
       on: {
         END_WORKING: {
           target: 'editing',
