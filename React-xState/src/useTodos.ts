@@ -67,8 +67,8 @@ export function useTodos(initialTodos: Todo[]): {
   todos: Todo[]
   addTodo: (text: string) => void
   removeTodo: (id: number) => void
-  onStartWorking: () => void
-  onEndWorking: () => void
+  startWorking: () => void
+  endWorking: () => void
 } {
   const [state, send] = useMachine(todoMachine)
 
@@ -98,11 +98,11 @@ export function useTodos(initialTodos: Todo[]): {
     [send]
   )
 
-  const onStartWorking = React.useCallback(() => {
+  const startWorking = React.useCallback(() => {
     send('START_WORKING')
   }, [send])
 
-  const onEndWorking = React.useCallback(() => {
+  const endWorking = React.useCallback(() => {
     send('END_WORKING')
   }, [send])
 
@@ -111,7 +111,7 @@ export function useTodos(initialTodos: Todo[]): {
     todos: state.context.todos,
     addTodo,
     removeTodo,
-    onStartWorking,
-    onEndWorking,
+    startWorking,
+    endWorking,
   }
 }
