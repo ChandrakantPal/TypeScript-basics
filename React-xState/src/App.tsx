@@ -33,6 +33,29 @@ const Button: React.FunctionComponent<
   </button>
 )
 
+function UL<T>({
+  items,
+  render,
+  itemClick,
+}: React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLUListElement>,
+  HTMLUListElement
+> & {
+  items: T[]
+  render: (item: T) => React.ReactNode
+  itemClick: (item: T) => void
+}) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li onClick={() => itemClick(item)} key={index}>
+          {render(item)}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 function App() {
   const initialTodos = React.useMemo(
     () => [
@@ -61,28 +84,21 @@ function App() {
       <Heading title="Introduction" />
       <Box>Hello there</Box>
       <Heading title="Todos" />
-      {todos.map((todo) => (
-        <div key={todo.id}>
-          {todo.text}
-          <button onClick={() => removeTodo(todo.id)}>Remove</button>
-        </div>
-      ))}
+      <UL
+        items={todos}
+        itemClick={(item) => {}}
+        render={(todo) => (
+          <div key={todo.id}>
+            ({todo.done ? 'Done' : 'Not Done'}){todo.text}
+            <button onClick={() => removeTodo(todo.id)}>Remove</button>
+          </div>
+        )}
+      />
       <div>
         <input type="text" ref={newTodoRef} />
         <Button onClick={onAddTodo}>Add Todo</Button>
       </div>
     </div>
-  )
-}
-
-const JustTheTodos = () => {
-  const { todos, addTodo, removeTodo } = useTodos(initialTodos)
-  return (
-    <>
-      {todos.map((todo) => (
-        <div key={todo.id}>{todo.text}</div>
-      ))}
-    </>
   )
 }
 
@@ -94,7 +110,6 @@ const AppWrapper = () => (
     }}
   >
     <App />
-    {/* <JustTheTodos /> */}
   </div>
 )
 
