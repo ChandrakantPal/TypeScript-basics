@@ -15,62 +15,70 @@ const todoMachine = createMachine<
   | { type: 'SET_TODOS'; todos: Todo[] }
   | { type: 'ADD_TODO'; text: string }
   | { type: 'REMOVE_TODO'; removeId: number }
->({
-  id: 'todoMachine',
-  initial: 'editing',
-  context: {
-    todos: [],
-  },
-  states: {
-    editing: {
-      on: {
-        START_WORKING: {
-          target: 'working',
+>(
+  {
+    id: 'todoMachine',
+    initial: 'editing',
+    context: {
+      todos: [],
+    },
+    states: {
+      editing: {
+        on: {
+          START_WORKING: {
+            target: 'working',
+            cond: 'haveUndoneTodos',
+          },
+          ADD_TODO: {
+            actions: assign({
+              todos: ({ todos }, { text }) => [
+                ...todos,
+                {
+                  id: todos.length,
+                  text,
+                  done: false,
+                },
+              ],
+            }),
+          },
+          REMOVE_TODO: {
+            actions: assign({
+              todos: ({ todos }, { removeId }) =>
+                todos.filter(({ id }) => id !== removeId),
+            }),
+          },
+          SET_TODOS: {
+            actions: assign({
+              todos: (_, { todos }) => todos,
+            }),
+          },
         },
-        ADD_TODO: {
-          actions: assign({
-            todos: ({ todos }, { text }) => [
-              ...todos,
-              {
-                id: todos.length,
-                text,
-                done: false,
-              },
-            ],
-          }),
-        },
-        REMOVE_TODO: {
-          actions: assign({
-            todos: ({ todos }, { removeId }) =>
-              todos.filter(({ id }) => id !== removeId),
-          }),
-        },
-        SET_TODOS: {
-          actions: assign({
-            todos: (_, { todos }) => todos,
-          }),
+      },
+      working: {
+        exit: assign({
+          todos: ({ todos }) => {
+            const newTodos = [...todos]
+            const undoneTodo = newTodos.find(({ done }) => !done)
+            if (undoneTodo) {
+              undoneTodo.done = true
+            }
+            return newTodos
+          },
+        }),
+        on: {
+          END_WORKING: {
+            target: 'editing',
+          },
         },
       },
     },
-    working: {
-      exit: assign({
-        todos: ({ todos }) => {
-          const newTodos = [...todos]
-          const undoneTodo = newTodos.find(({ done }) => !done)
-          if (undoneTodo) {
-            undoneTodo.done = true
-          }
-          return newTodos
-        },
-      }),
-      on: {
-        END_WORKING: {
-          target: 'editing',
-        },
-      },
-    },
   },
-})
+  {
+    guards: {
+      haveUndoneTodos: ({ todos }) => todos.some(({ done }) => !done),
+    },
+  }
+)
 
 export function useTodos(initialTodos: Todo[]): {
   isEditing: boolean
