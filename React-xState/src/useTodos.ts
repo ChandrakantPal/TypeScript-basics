@@ -63,7 +63,7 @@ export function useTodos(initialTodos: Todo[]): {
       type: 'SET_TODOS',
       todos: initialTodos,
     })
-  }, [])
+  }, [send, initialTodos])
 
   const addTodo = React.useCallback(
     (text: string) => {
