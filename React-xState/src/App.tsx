@@ -33,15 +33,17 @@ const Button: React.FunctionComponent<
   </button>
 )
 
-const initialTodos = [
-  {
-    id: 0,
-    text: 'Hey there',
-    done: false,
-  },
-]
-
 function App() {
+  const initialTodos = React.useMemo(
+    () => [
+      {
+        id: 0,
+        text: 'Hey there',
+        done: false,
+      },
+    ],
+    []
+  )
   const { todos, addTodo, removeTodo } = useTodos(initialTodos)
 
   // Experimental storing the value in ref to avoid state change
