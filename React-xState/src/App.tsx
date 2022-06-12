@@ -92,7 +92,7 @@ const AppWrapper = () => (
     }}
   >
     <App />
-    <JustTheTodos />
+    {/* <JustTheTodos /> */}
   </div>
 )
 
