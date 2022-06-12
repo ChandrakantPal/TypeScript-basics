@@ -10,6 +10,8 @@ interface Todo {
 
 const todoMachine = createMachine<
   { todos: Todo[] },
+  | { type: 'START_WORKING' }
+  | { type: 'END_WORKING' }
   | { type: 'SET_TODOS'; todos: Todo[] }
   | { type: 'ADD_TODO'; text: string }
   | { type: 'REMOVE_TODO'; removeId: number }
@@ -22,6 +24,9 @@ const todoMachine = createMachine<
   states: {
     editing: {
       on: {
+        START_WORKING: {
+          target: 'working',
+        },
         ADD_TODO: {
           actions: assign({
             todos: ({ todos }, { text }) => [
@@ -47,11 +52,18 @@ const todoMachine = createMachine<
         },
       },
     },
-    working: {},
+    working: {
+      on: {
+        END_WORKING: {
+          target: 'editing',
+        },
+      },
+    },
   },
 })
 
 export function useTodos(initialTodos: Todo[]): {
+  isEditing: boolean
   todos: Todo[]
   addTodo: (text: string) => void
   removeTodo: (id: number) => void
@@ -83,5 +95,10 @@ export function useTodos(initialTodos: Todo[]): {
     },
     [send]
   )
-  return { todos: state.context.todos, addTodo, removeTodo }
+  return {
+    isEditing: state.matches('editing'),
+    todos: state.context.todos,
+    addTodo,
+    removeTodo,
+  }
 }
