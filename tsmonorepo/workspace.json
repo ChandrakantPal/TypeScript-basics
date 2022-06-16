@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "myapp": "apps/myapp",
-    "myapp-e2e": "apps/myapp-e2e"
+    "myapp-e2e": "apps/myapp-e2e",
+    "mycomps": "libs/mycomps"
   }
 }
