@@ -1,6 +1,7 @@
 import { performance } from 'perf_hooks'
 import 'reflect-metadata'
 
+// parameter decorator
 const importantMetadataKey = Symbol('important')
 
 export function important(
