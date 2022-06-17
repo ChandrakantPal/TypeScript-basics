@@ -3,7 +3,7 @@ import { performance } from 'perf_hooks'
 interface ThisWithTimings {
   __timings: unknown[]
 }
-
+// class decorator
 export function logTimings<T extends { new (...args: any[]): {} }>(
   constructor: T
 ) {
@@ -12,6 +12,7 @@ export function logTimings<T extends { new (...args: any[]): {} }>(
   }
 }
 
+// function decorators
 export function timing() {
   return function (
     target: any,
