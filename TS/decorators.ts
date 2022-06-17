@@ -30,4 +30,7 @@ class Users {
   await users.getUser(42)
 
   await users.getUsers()
+
+  // @ts-ignore
+  console.log(users.__timings)
 })()
