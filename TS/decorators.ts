@@ -1,4 +1,4 @@
-import { timing } from './perfDecorators'
+import { timing, logTimings } from './perfDecorators'
 
 const delay = <T>(time: number, data: T): Promise<T> =>
   new Promise((resolve) =>
@@ -7,6 +7,7 @@ const delay = <T>(time: number, data: T): Promise<T> =>
     }, time)
   )
 
+@logTimings
 class Users {
   @timing()
   async getUsers() {
