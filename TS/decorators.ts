@@ -32,5 +32,5 @@ class Users {
   await users.getUsers()
 
   // @ts-ignore
-  console.log(users.__timings)
+  users?.printTimings()
 })()
