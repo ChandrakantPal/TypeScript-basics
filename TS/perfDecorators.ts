@@ -6,7 +6,10 @@ export function timing() {
   ) {
     const value = descriptor.value
     descriptor.value = async function (...args: any[]) {
+      const start = performance.now()
       const out = await value.apply(this, args)
+      const end = performance.now()
+      console.log(end - start)
       return out
     }
   }
