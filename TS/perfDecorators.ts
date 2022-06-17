@@ -28,6 +28,9 @@ export function logTimings<T extends { new (...args: any[]): {} }>(
 ) {
   return class extends constructor {
     __timings = []
+    printTimings = () => {
+      console.log(this.__timings)
+    }
   }
 }
 
