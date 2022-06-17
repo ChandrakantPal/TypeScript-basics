@@ -1,3 +1,4 @@
+import { performance } from 'perf_hooks'
 export function timing() {
   return function (
     target: any,
