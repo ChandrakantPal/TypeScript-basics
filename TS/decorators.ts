@@ -1,3 +1,5 @@
+import { timing } from './perfDecorators'
+
 const delay = <T>(time: number, data: T): Promise<T> =>
   new Promise((resolve) =>
     setTimeout(() => {
@@ -6,9 +8,11 @@ const delay = <T>(time: number, data: T): Promise<T> =>
   )
 
 class Users {
+  @timing()
   async getUsers() {
     return await delay(1000, [])
   }
+  @timing()
   async getUser(id: number) {
     return await delay(50, {
       id: `user:${id}`,
