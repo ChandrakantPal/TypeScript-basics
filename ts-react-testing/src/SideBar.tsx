@@ -10,7 +10,9 @@ const SideBar = ({
     <div>
       {items.map((item) => (
         <div key={item.href}>
-          <a href={item.href}>{item.name}</a>
+          <a role="navigation" href={item.href}>
+            {item.name}
+          </a>
         </div>
       ))}
     </div>
