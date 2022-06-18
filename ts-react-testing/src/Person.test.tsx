@@ -4,6 +4,6 @@ import Person from './Person'
 
 test('renders a name', () => {
   render(<Person name="Sanjay" />)
-  const linkElement = screen.getByText(/Name is Sanjay/i)
-  expect(linkElement).toBeInTheDocument()
+  const divElement = screen.getByRole('contentinfo')
+  expect(divElement).toHaveTextContent('Name is Sanjay')
 })
