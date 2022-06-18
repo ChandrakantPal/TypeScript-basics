@@ -6,4 +6,5 @@ test('renders a name', () => {
   render(<Person name="Sanjay" />)
   const divElement = screen.getByRole('contentinfo')
   expect(divElement).toHaveTextContent('Name is Sanjay')
+  expect(divElement).toHaveAttribute('role', 'contentinfo')
 })
