@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export const APIComponent: React.FunctionComponent = () => {
+const APIComponent: React.FunctionComponent = () => {
   const [data, setData] = React.useState<{
     name: string
   }>()
@@ -21,3 +21,4 @@ export const APIComponent: React.FunctionComponent = () => {
 
   return <div>{data && <div role="contentinfo">Name is {data.name}</div>}</div>
 }
+export default APIComponent
