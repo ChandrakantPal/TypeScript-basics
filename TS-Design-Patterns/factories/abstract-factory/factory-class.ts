@@ -32,8 +32,8 @@ class DevelopmentLogger implements ILogger {
 }
 
 class LoggerFactory {
-  public static createLogger(env: string): ILogger {
-    if (env === 'production') {
+  public static createLogger(): ILogger {
+    if (process.env.NODE_ENV === 'production') {
       return new ProductionLogger()
     } else {
       return new DevelopmentLogger()
