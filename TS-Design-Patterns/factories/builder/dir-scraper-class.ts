@@ -21,3 +21,15 @@ class DirectoryScraper {
       }, {})
   }
 }
+
+class FileReader implements IFileReader {
+  isJSONFile(file: string): boolean {
+    return file.endsWith('.json')
+  }
+  readText(file: string): string {
+    return fs.readFileSync(file, 'utf-8').toString()
+  }
+  readJson(file: string): unknown {
+    return JSON.parse(fs.readFileSync(file, 'utf-8').toString())
+  }
+}
