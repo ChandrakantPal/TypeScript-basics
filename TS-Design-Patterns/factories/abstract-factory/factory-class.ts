@@ -15,3 +15,18 @@ class ProductionLogger implements ILogger {
     console.error(message)
   }
 }
+
+class DevelopmentLogger implements ILogger {
+  info(message: string): void {
+    console.warn(message)
+  }
+  warn(message: string): void {
+    console.warn(message)
+  }
+  debug(message: string): void {
+    console.warn(message)
+  }
+  error(message: string): void {
+    console.error(message)
+  }
+}
