@@ -33,3 +33,8 @@ class FileReader implements IFileReader {
     return JSON.parse(fs.readFileSync(file, 'utf-8').toString())
   }
 }
+
+const fileReader = new FileReader()
+const dirScraper = new DirectoryScraper('./data', fileReader)
+const output = dirScraper.scanFiles()
+console.log(output)
