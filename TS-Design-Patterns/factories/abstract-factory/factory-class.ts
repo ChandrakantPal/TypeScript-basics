@@ -30,3 +30,13 @@ class DevelopmentLogger implements ILogger {
     console.error(message)
   }
 }
+
+class LoggerFactory {
+  public static createLogger(env: string): ILogger {
+    if (env === 'production') {
+      return new ProductionLogger()
+    } else {
+      return new DevelopmentLogger()
+    }
+  }
+}
