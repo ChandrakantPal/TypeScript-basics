@@ -17,3 +17,10 @@ class DataClass extends Subscribable<number> {
     this.publish(v)
   }
 }
+
+const dc = new DataClass(0)
+const dcUnsub = dc.subscribe((v: number) => console.log(`DC: ${v}`))
+const dcUnsub2 = dc.subscribe((v: number) => console.log(`DC2: ${v}`))
+dc.setValue(42)
+dcUnsub()
+dcUnsub2()
