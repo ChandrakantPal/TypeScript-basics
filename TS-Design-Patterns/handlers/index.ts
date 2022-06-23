@@ -9,7 +9,7 @@ export function createHandlerStack<MessageType>() {
     },
     publish(msg: MessageType): undefined | unknown {
       let data: unknown
-      for (const subscriber of subscribers) {
+      for (const subscriber of Array.from(subscribers)) {
         data = subscriber(msg)
         if (data === undefined) {
           break
