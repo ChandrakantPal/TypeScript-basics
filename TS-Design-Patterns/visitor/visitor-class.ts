@@ -16,3 +16,16 @@ class VisitAllPages<DataType> {
     } while (nextUrl)
   }
 }
+
+interface Pokemon {
+  name: string
+  url: string
+}
+
+const visitor = new VisitAllPages<Pokemon[]>(
+  'https://pokeapi.co/api/v2/pokemon/'
+)
+
+visitor.visit((results) => {
+  console.log(results)
+})
