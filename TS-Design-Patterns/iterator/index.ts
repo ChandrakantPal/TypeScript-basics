@@ -12,3 +12,19 @@ async function* iterateResults<DataType>(url: string) {
     nextUrl = json.next
   } while (nextUrl)
 }
+
+interface Pokemon {
+  name: string
+  url: string
+}
+
+;(async function () {
+  for await (const result of iterateResults<Pokemon>(
+    'https://pokeapi.co/api/v2/pokemon/'
+  )) {
+    console.log(result)
+    if (result.name === 'pikachu') {
+      break
+    }
+  }
+})()
