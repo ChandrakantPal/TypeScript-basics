@@ -8,9 +8,45 @@ interface Todo {
 }
 
 function App() {
-  const [todo, setTodo, undo] = useStateWithUndo<Todo[]>([])
+  const [todos, setTodos, undo] = useStateWithUndo<Todo[]>([])
+  const todoText = React.useRef<HTMLInputElement>(null)
 
-  return <div className="App"></div>
+  return (
+    <div className="App">
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          <input
+            type="checkbox"
+            checked={todo.done}
+            onChange={() =>
+              setTodos(todos.map((todo) => ({ ...todo, done: !todo.done })))
+            }
+          />
+          <label>{todo.text}</label>
+        </div>
+      ))}
+      <div>
+        <input type="text" ref={todoText} />
+        <button
+          onClick={() =>
+            setTodos([
+              ...todos,
+              {
+                id: todos.length + 1,
+                text: todoText.current!.value,
+                done: false,
+              },
+            ])
+          }
+        >
+          Add
+        </button>
+      </div>
+      <div>
+        <button onClick={undo}>Undo</button>
+      </div>
+    </div>
+  )
 }
 
 export default App
