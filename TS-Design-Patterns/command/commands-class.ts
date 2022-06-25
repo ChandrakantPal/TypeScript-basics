@@ -10,4 +10,9 @@ class CommandStack<State> {
   get state() {
     return this._state
   }
+
+  execute(command: Command<State>) {
+    this._state = command.execute(this._state)
+    this.stack.push(command)
+  }
 }
