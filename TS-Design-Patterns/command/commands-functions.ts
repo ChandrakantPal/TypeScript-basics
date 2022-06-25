@@ -42,3 +42,7 @@ console.log(cStack.execute(addOne))
 console.log(cStack.undo())
 console.log(cStack.execute(subtractOne))
 console.log(cStack.undo())
+
+const setTo42 = createSetValue(42)
+console.log(cStack.execute(setTo42))
+console.log(cStack.undo())
