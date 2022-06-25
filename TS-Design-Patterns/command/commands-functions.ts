@@ -30,6 +30,13 @@ const subtractOne: CommandFunction<number> = (state) => [
   (state) => state + 1,
 ]
 
+const createSetValue = (value: number): CommandFunction<number> => {
+  return (state) => {
+    const _originalStete = state
+    return [value, () => _originalStete]
+  }
+}
+
 const cStack = createCommandStack(0)
 console.log(cStack.execute(addOne))
 console.log(cStack.undo())
