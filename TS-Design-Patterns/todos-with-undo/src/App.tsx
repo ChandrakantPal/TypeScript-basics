@@ -12,7 +12,7 @@ function App() {
   const todoText = React.useRef<HTMLInputElement>(null)
 
   return (
-    <div className="App">
+    <div>
       {todos.map((todo) => (
         <div key={todo.id}>
           <input
