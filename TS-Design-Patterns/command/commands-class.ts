@@ -33,3 +33,5 @@ class AddOne extends Command<number> {
     return state - 1
   }
 }
+
+const cs = new CommandStack<number>(0)
