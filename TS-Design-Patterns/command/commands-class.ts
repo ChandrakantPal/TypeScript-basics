@@ -34,7 +34,21 @@ class AddOne extends Command<number> {
   }
 }
 
+class SubtractOne extends Command<number> {
+  execute(state: number): number {
+    return state - 1
+  }
+
+  undo(state: number): number {
+    return state + 1
+  }
+}
+
 const cs = new CommandStack<number>(0)
 console.log(cs.state)
 cs.execute(new AddOne())
+console.log(cs.state)
+cs.undo()
+console.log(cs.state)
+cs.execute(new SubtractOne())
 console.log(cs.state)
