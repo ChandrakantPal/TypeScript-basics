@@ -35,3 +35,6 @@ class AddOne extends Command<number> {
 }
 
 const cs = new CommandStack<number>(0)
+console.log(cs.state)
+cs.execute(new AddOne())
+console.log(cs.state)
