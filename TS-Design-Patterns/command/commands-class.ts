@@ -44,6 +44,21 @@ class SubtractOne extends Command<number> {
   }
 }
 
+class SetValue extends Command<number> {
+  private _originalValue?: number
+  constructor(private value: number) {
+    super()
+  }
+  execute(state: number): number {
+    this._originalValue = state
+    return this.value
+  }
+
+  undo(state: number): number {
+    return this._originalValue!
+  }
+}
+
 const cs = new CommandStack<number>(0)
 console.log(cs.state)
 cs.execute(new AddOne())
