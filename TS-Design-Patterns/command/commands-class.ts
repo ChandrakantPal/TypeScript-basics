@@ -23,3 +23,13 @@ class CommandStack<State> {
     }
   }
 }
+
+class AddOne extends Command<number> {
+  execute(state: number): number {
+    return state + 1
+  }
+
+  undo(state: number): number {
+    return state - 1
+  }
+}
