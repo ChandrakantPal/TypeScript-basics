@@ -19,3 +19,19 @@ function createCommandStack<State>(state: State) {
     },
   }
 }
+
+const addOne: CommandFunction<number> = (state) => [
+  state + 1,
+  (state) => state - 1,
+]
+
+const subtractOne: CommandFunction<number> = (state) => [
+  state - 1,
+  (state) => state + 1,
+]
+
+const cStack = createCommandStack(0)
+console.log(cStack.execute(addOne))
+console.log(cStack.undo())
+console.log(cStack.execute(subtractOne))
+console.log(cStack.undo())
