@@ -15,4 +15,11 @@ class CommandStack<State> {
     this._state = command.execute(this._state)
     this.stack.push(command)
   }
+
+  undo() {
+    const command = this.stack.pop()
+    if (command) {
+      this._state = command.undo(this._state)
+    }
+  }
 }
