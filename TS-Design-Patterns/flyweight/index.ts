@@ -23,6 +23,10 @@ function makeURLFlyweight<ReturnType>(url: Record<string, string>) {
   return new Proxy(myObject, {
     get: (target, name: string) => {
       console.log(`Fetching ${name} ${url[name]}`)
+      if (!target[name]) {
+        target[name] = fetch(url[name]).then((res) => res.json())
+      }
+      return target[name]
     },
   })
 }
@@ -39,4 +43,9 @@ function makeURLFlyweight<ReturnType>(url: Record<string, string>) {
     {}
   )
   const lookup = makeURLFlyweight<Pokemon>(urls)
+  const data = await lookup.bulbasaur
+  console.log(data.species)
+
+  const data2 = await lookup.venusaur
+  console.log(data2.species)
 })()
