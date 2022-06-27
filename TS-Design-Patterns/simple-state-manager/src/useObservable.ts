@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 export function createSubscribable<MessageType>() {
   const subscribers: Set<(msg: MessageType) => void> = new Set()
 
@@ -43,4 +45,16 @@ export function createObservable<DataType>(
       },
     }
   ) as Observable<DataType>
+}
+
+export function useObservable<DataType>(
+  observable: Observable<DataType>
+): DataType {
+  const [, setVersion] = React.useState(0)
+  React.useEffect(
+    () => observable.subscribe(() => setVersion((v) => v + 1)),
+    []
+  )
+
+  return observable as DataType
 }
