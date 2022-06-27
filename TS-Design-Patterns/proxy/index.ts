@@ -42,3 +42,17 @@ function createObservable<DataType>(data: DataType): Observable<DataType> {
     }
   ) as Observable<DataType>
 }
+
+interface Message {
+  message1: string
+  message2: string
+}
+const target: Message = {
+  message1: 'hello',
+  message2: 'everyone',
+}
+
+const proxy = createObservable(target)
+proxy.subscribe(console.log)
+proxy.message1 = 'foo!'
+proxy.message2 = 'something else!'
